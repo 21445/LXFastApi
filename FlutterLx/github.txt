@@ -14,8 +14,38 @@ git commit -m "第二次提交"
 git push
 
 下载代码
-git clone https://github.com/21445/ShuaTiBao.git
+git clone https://github.com/21445/LXFastApi.git
 git pull
+
+# 1. 删除子目录内部的.git，本地源代码不会删除！！
+Remove-Item -Recurse -Force 你的子目录路径\.git
+
+# 2. 清除git索引里面残留的子模块记录，--cached必须保留，不会删本地文件
+git rm --cached 你的子目录路径
+
+# 3. 删除子模块配置文件（没有就跳过，不会报错）
+Remove-Item -Force .gitmodules -ErrorAction SilentlyContinue
+
+# 4. 重新扫描全部文件，把子文件夹内部真实文件纳入版本
+git add .
+
+# 5. 提交
+git commit -m "移除内嵌git，上传子目录全部源码"
+
+# 6.拉取远程，防止推送被拒绝
+git pull origin main
+
+#7.推送
+git push
+
+
+（怀疑有内嵌 git 就运行）
+1. 检查当前在哪个 git 仓库
+git rev-parse --show-toplevel
+✅输出必须是项目最外层根目录；如果输出是子文件夹路径，说明你进到子 git 仓库里面了，cd 退回到外层。
+
+2. 扫描当前目录下所有子文件夹，找出隐藏的.git
+Get-ChildItem -Recurse -Force -Filter ".git" | Select-Object FullName
 
 
 设备	        命令
@@ -23,4 +53,4 @@ Android 模拟器	flutter run -d android
 iOS 模拟器	flutter run -d iphone
 Chrome 浏览器	flutter run -d chrome
 Windows 桌面	flutter run -d windows
-753852
+
