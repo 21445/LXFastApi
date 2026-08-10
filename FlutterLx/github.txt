@@ -1,0 +1,25 @@
+上传代码
+初始化第一次上传
+git init 
+ git add .
+ git commit -m "更新内容"
+ git branch -M main     
+ git remote add origin https://github.com/21445/ShuaTiBao.git
+ git push -u origin main
+
+
+第二次提交
+git add .
+git commit -m "第二次提交"
+git push
+
+下载代码
+git clone https://github.com/21445/ShuaTiBao.git
+git pull
+
+
+设备	        命令
+Android 模拟器	flutter run -d android
+iOS 模拟器	flutter run -d iphone
+Chrome 浏览器	flutter run -d chrome
+Windows 桌面	flutter run -d windows

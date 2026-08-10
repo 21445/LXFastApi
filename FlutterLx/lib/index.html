@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>刷题宝 · APP 交互原型</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark"><i data-lucide="book-open-check"></i></div>
+        <div class="brand-text">
+          <h1>刷题宝</h1>
+          <p>科学刷题 · 高效备考</p>
+        </div>
+      </div>
+      <div class="topbar-meta">
+        <a class="meta-pill library" href="icons.html"><i data-lucide="library"></i>图标库</a>
+        <span class="meta-pill"><i data-lucide="circle-check"></i>17 个原型页面</span>
+        <span class="meta-pill accent"><i data-lucide="sparkles"></i>交互测试版 v1.0</span>
+      </div>
+    </header>
+
+    <main class="main">
+      <aside class="sidebar">
+        <div class="sidebar-title">页面导航</div>
+        <nav id="screenNav" class="nav-list">
+          <div class="nav-group">
+            <h4>冷启动与账户</h4>
+            <button class="nav-item active" data-screen="splash"><span class="nav-num">01</span><span class="nav-label">启动页</span></button>
+            <button class="nav-item" data-screen="guide"><span class="nav-num">02</span><span class="nav-label">引导页</span></button>
+            <button class="nav-item" data-screen="login"><span class="nav-num">03</span><span class="nav-label">登录 / 注册</span></button>
+          </div>
+          <div class="nav-group">
+            <h4>首页与题库</h4>
+            <button class="nav-item" data-screen="home"><span class="nav-num">04</span><span class="nav-label">首页</span></button>
+            <button class="nav-item" data-screen="bank"><span class="nav-num">05</span><span class="nav-label">题库选择</span></button>
+            <button class="nav-item" data-screen="chapters"><span class="nav-num">06</span><span class="nav-label">章节练习</span></button>
+          </div>
+          <div class="nav-group">
+            <h4>练习闭环</h4>
+            <button class="nav-item" data-screen="practice"><span class="nav-num">07</span><span class="nav-label">练习答题</span></button>
+            <button class="nav-item" data-screen="answersheet"><span class="nav-num">08</span><span class="nav-label">答题卡</span></button>
+            <button class="nav-item" data-screen="wrongbook"><span class="nav-num">09</span><span class="nav-label">错题本</span></button>
+            <button class="nav-item" data-screen="favorites"><span class="nav-num">10</span><span class="nav-label">我的收藏</span></button>
+          </div>
+          <div class="nav-group">
+            <h4>考试与报告</h4>
+            <button class="nav-item" data-screen="exam"><span class="nav-num">11</span><span class="nav-label">模拟考试</span></button>
+            <button class="nav-item" data-screen="report"><span class="nav-num">12</span><span class="nav-label">成绩报告</span></button>
+            <button class="nav-item" data-screen="study"><span class="nav-num">13</span><span class="nav-label">学习报告</span></button>
+          </div>
+          <div class="nav-group">
+            <h4>我的</h4>
+            <button class="nav-item" data-screen="mine"><span class="nav-num">14</span><span class="nav-label">个人中心</span></button>
+            <button class="nav-item" data-screen="settings"><span class="nav-num">15</span><span class="nav-label">设置</span></button>
+            <button class="nav-item" data-screen="messages"><span class="nav-num">16</span><span class="nav-label">消息中心</span></button>
+            <button class="nav-item" data-screen="support"><span class="nav-num">17</span><span class="nav-label">在线客服</span></button>
+          </div>
+        </nav>
+      </aside>
+
+      <section class="stage">
+        <div class="stage-head">
+          <div>
+            <p class="stage-kicker" id="stageKicker">页面 01 / 17</p>
+            <h2 id="stageTitle">启动页</h2>
+            <p id="stageDesc">品牌启动画面，展示产品定位与核心标语。</p>
+          </div>
+          <div class="stage-tags" id="stageTags">
+            <span>冷启动</span>
+            <span>品牌</span>
+          </div>
+        </div>
+        <div class="phone-wrap" id="phoneWrap">
+          <div class="phone" id="phone">
+            <div class="phone-camera"></div>
+            <div class="phone-screen" id="phoneScreen">
+              <div class="status-bar" id="statusBar">
+                <span class="sb-time">9:41</span>
+                <div class="sb-icons">
+                  <i data-lucide="signal"></i>
+                  <i data-lucide="wifi"></i>
+                  <i data-lucide="battery-full"></i>
+                </div>
+              </div>
+
+              <section class="app-screen active" id="screen-splash">
+                <div class="splash">
+                  <div class="splash-topline">
+                    <span>刷题宝</span>
+                    <span>v1.0.0</span>
+                  </div>
+                  <div class="splash-brand">
+                    <div class="splash-logo"><i data-lucide="book-open-check"></i></div>
+                    <h1>刷题宝</h1>
+                    <p>科学刷题 · 高效备考</p>
+                  </div>
+                  <div class="splash-cards">
+                    <div class="splash-chip chip-blue"><i data-lucide="zap"></i>智能组卷</div>
+                    <div class="splash-chip chip-orange"><i data-lucide="alert-circle"></i>错题归纳</div>
+                    <div class="splash-chip chip-green"><i data-lucide="trophy"></i>成绩报告</div>
+                  </div>
+                  <div class="splash-load">
+                    <div class="splash-track"><span></span></div>
+                    <p>正在加载题库…</p>
+                  </div>
+                </div>
+              </section>
+
+              <section class="app-screen" id="screen-guide">
+                <div class="guide">
+                  <div class="guide-slides" id="guideSlides">
+                    <div class="guide-slide active">
+                      <div class="guide-illust blue"><i data-lucide="brain"></i></div>
+                      <h2>智能刷题</h2>
+                      <p>按知识点智能组卷，题目难度贴合你的当前水平。</p>
+                    </div>
+                    <div class="guide-slide">
+                      <div class="guide-illust coral"><i data-lucide="notebook-pen"></i></div>
+                      <h2>错题自动归纳</h2>
+                      <p>错题自动进入错题本，薄弱知识点看得一清二楚。</p>
+                    </div>
+                    <div class="guide-slide">
+                      <div class="guide-illust teal"><i data-lucide="trophy"></i></div>
+                      <h2>全真模拟考试</h2>
+                      <p>模拟真实考场节奏，考后自动生成成绩报告。</p>
+                    </div>
+                  </div>
+                  <div class="guide-dots" id="guideDots">
+                    <span class="active"></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <div class="guide-actions">
+                    <button class="guide-skip" id="guideSkip">跳过</button>
+                    <button class="primary-btn guide-next" id="guideNext">下一步 <i data-lucide="chevron-right"></i></button>
+                  </div>
+                </div>
+              </section>
+
+              <section class="app-screen" id="screen-login">
+                <div class="auth">
+                  <div class="auth-head">
+                    <div class="auth-logo"><i data-lucide="book-open-check"></i></div>
+                    <h1>欢迎来到刷题宝</h1>
+                    <p>登录后同步你的练习与考试记录</p>
+                  </div>
+                  <div class="auth-tabs" id="authTabs">
+                    <button class="active" data-mode="login">登录</button>
+                    <button data-mode="register">注册</button>
+                  </div>
+                  <form class="auth-form" id="authForm">
+                    <label for="authPhone">手机号</label>
+                    <div class="input-wrap"><i data-lucide="phone"></i><input id="authPhone" value="138 0000 0000"></div>
+                    <label for="authCode">验证码</label>
+                    <div class="code-row">
+                      <div class="input-wrap"><i data-lucide="lock"></i><input id="authCode" value="123456"></div>
+                      <button type="button" class="code-btn" id="codeBtn">获取验证码</button>
+                    </div>
+                    <button type="button" class="primary-btn auth-submit" id="authSubmit">登 录</button>
+                  </form>
+                  <div class="auth-links">
+                    <span>忘记密码</span>
+                    <span class="dot">·</span>
+                    <span>遇到问题</span>
+                  </div>
+                  <p class="auth-agree">登录即代表同意《用户协议》与《隐私政策》</p>
+                </div>
+              </section>
+
+              <section class="app-screen has-nav" id="screen-home">
+                <div class="home">
+                  <div class="home-header">
+                    <div>
+                      <p class="hello">早上好，同学</p>
+                      <h2>今天也要加油呀</h2>
+                    </div>
+                    <button class="icon-btn" data-open="messages"><i data-lucide="bell"></i><span class="badge-dot"></span></button>
+                  </div>
+                  <div class="search-bar">
+                    <i data-lucide="search"></i>
+                    <input placeholder="搜索科目、知识点或题目">
+                    <button class="icon-btn small"><i data-lucide="sliders-horizontal"></i></button>
+                  </div>
+                  <div class="hero-card">
+                    <div class="hero-copy">
+                      <span class="hero-tag">今日目标</span>
+                      <h3>科学刷题<br>高效备考</h3>
+                      <p>已完成 42 / 80 题</p>
+                    </div>
+                    <div class="hero-ring"><span>52%</span></div>
+                  </div>
+                  <div class="stats-row">
+                    <div class="stat-card"><strong>126</strong><span>连续天数</span></div>
+                    <div class="stat-card"><strong>87%</strong><span>平均正确率</span></div>
+                    <div class="stat-card"><strong>2,480</strong><span>累计刷题</span></div>
+                  </div>
+                  <div class="section-head">
+                    <h3>快捷功能</h3>
+                    <button class="text-btn" data-open="bank">全部 <i data-lucide="chevron-right"></i></button>
+                  </div>
+                  <div class="quick-grid">
+                    <button class="quick-item" data-open="practice">
+                      <span class="quick-ico blue"><i data-lucide="zap"></i></span>
+                      <span>智能刷题</span>
+                    </button>
+                    <button class="quick-item" data-open="bank">
+                      <span class="quick-ico indigo"><i data-lucide="library"></i></span>
+                      <span>题库选择</span>
+                    </button>
+                    <button class="quick-item" data-open="chapters">
+                      <span class="quick-ico coral"><i data-lucide="list-checks"></i></span>
+                      <span>章节练习</span>
+                    </button>
+                    <button class="quick-item" data-open="exam">
+                      <span class="quick-ico teal"><i data-lucide="timer"></i></span>
+                      <span>模拟考试</span>
+                    </button>
+                    <button class="quick-item" data-open="wrongbook">
+                      <span class="quick-ico amber"><i data-lucide="alert-circle"></i></span>
+                      <span>错题本</span>
+                    </button>
+                    <button class="quick-item" data-open="favorites">
+                      <span class="quick-ico rose"><i data-lucide="bookmark"></i></span>
+                      <span>我的收藏</span>
+                    </button>
+                  </div>
+                  <div class="continue-card">
+                    <div class="continue-ico"><i data-lucide="book-open"></i></div>
+                    <div class="continue-copy">
+                      <span>继续上次练习</span>
+                      <h3>高等数学 · 第 3 章</h3>
+                      <p>剩余 18 题 · 预计 12 分钟</p>
+                    </div>
+                    <button class="cta-btn" data-open="practice">继续</button>
+                  </div>
+                </div>
+              </section>
+
+              <section class="app-screen has-nav" id="screen-bank">
+                <div class="app-page">
+                  <div class="top-bar">
+                    <button class="icon-btn" data-open="home"><i data-lucide="arrow-left"></i></button>
+                    <h2>题库选择</h2>
+                    <button class="icon-btn"><i data-lucide="search"></i></button>
+                  </div>
+                  <div class="subject-chips" id="subjectChips">
+                    <button class="active">数学</button>
+                    <button>英语</button>
+                    <button>语文</button>
+                    <button>专业课</button>
+                  </div>
+                  <div class="bank-banner">
+                    <div>
+                      <span>智能推荐</span>
+                      <h3>高等数学（上）</h3>
+                      <p>根据你的练习记录生成专属题单</p>
+                    </div>
+                    <i data-lucide="sparkles"></i>
+                  </div>
+                  <div class="bank-tabs">
+                    <button class="active">章节</button>
+                    <button>知识点</button>
+                    <button>真题</button>
+                    <button>模拟</button>
+                  </div>
+                  <div class="bank-list">
+                    <button class="bank-item" data-open="chapters">
+                      <span class="bank-ico blue"><i data-lucide="book-open"></i></span>
+                      <span class="bank-info">
+                        <strong>高等数学（上）</strong>
+                        <em>12 章 · 1,860 题</em>
+                        <span class="mini-bar"><i style="width:72%"></i></span>
+                      </span>
+                      <span class="bank-pct">72%</span>
+                      <i data-lucide="chevron-right"></i>
+                    </button>
+                    <button class="bank-item" data-open="chapters">
+                      <span class="bank-ico indigo"><i data-lucide="book-open"></i></span>
+                      <span class="bank-info">
+                        <strong>线性代数</strong>
+                        <em>8 章 · 1,240 题</em>
+                        <span class="mini-bar"><i style="width:54%"></i></span>
+                      </span>
+                      <span class="bank-pct">54%</span>
+                      <i data-lucide="chevron-right"></i>
+                    </button>
+                    <button class="bank-item" data-open="chapters">
+                      <span class="bank-ico coral"><i data-lucide="book-open"></i></span>
+                      <span class="bank-info">
+                        <strong>大学英语四级</strong>
+                        <em>15 套真题 · 3,020 题</em>
+                        <span class="mini-bar"><i style="width:81%"></i></span>
+                      </span>
+                      <span class="bank-pct">81%</span>
+                      <i data-lucide="chevron-right"></i>
+                    </button>
+                    <button class="bank-item" data-open="chapters">
+                      <span class="bank-ico teal"><i data-lucide="book-open"></i></span>
+                      <span class="bank-info">
+                        <strong>计算机基础</strong>
+                        <em>10 章 · 1,560 题</em>
+                        <span class="mini-bar"><i style="width:38%"></i></span>
+                      </span>
+                      <span class="bank-pct">38%</span>
+                      <i data-lucide="chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
+              </section>
+
+              <section class="app-screen" id="screen-chapters">
+                <div class="app-page">
+                  <div class="top-bar">
+                    <button class="icon-btn" data-open="bank"><i data-lucide="arrow-left"></i></button>
+                    <h2>章节练习</h2>
+                    <button class="icon-btn" data-open="messages"><i data-lucide="bell"></i></button>
+                  </div>
+                  <div class="chapter-progress">
+                    <div class="cp-ring"><span>70%</span></div>
+                    <div class="cp-copy">
+                      <span>当前进度</span>
+                      <h3>函数与极限</h3>
+                      <p>已完成 42 / 60 题</p>
+                    </div>
+                  </div>
+                  <div class="section-head"><h3>章节目录</h3></div>
+                  <div class="chapter-list">
+                    <div class="chapter-item done">
+                      <span class="chk"><i data-lucide="check"></i></span>
+                      <span class="ch-info">
+                        <strong>第 1 章 函数</strong>
+                        <em>60 题 · 正确率 91%</em>
+                      </span>
+                      <span class="chapter-state">已完成</span>
+                    </div>
+                    <div class="chapter-item done">
+                      <span class="chk"><i data-lucide="check"></i></span>
+                      <span class="ch-info">
+                        <strong>第 2 章 极限与连续</strong>
+                        <em>58 题 · 正确率 84%</em>
+                      </span>
+                      <span class="chapter-state">已完成</span>
+                    </div>
+                    <div class="chapter-item current">
+                      <span class="chk">3</span>
+                      <span class="ch-info">
+                        <strong>第 3 章 函数与极限</strong>
+                        <em>60 题 · 已完成 42 题</em>
+                        <span class="mini-bar full"><i style="width:70%"></i></span>
+                      </span>
+                      <button class="cta-btn" data-open="practice">继续</button>
+                    </div>
+                    <div class="chapter-item">
+                      <span class="chk">4</span>
+                      <span class="ch-info">
+                        <strong>第 4 章 导数与微分</strong>
+                        <em>64 题 · 未开始</em>
+                      </span>
+                      <span class="chapter-state">未开始</span>
+                    </div>
+                    <div class="chapter-item">
+                      <span class="chk">5</span>
+                      <span class="ch-info">
+                        <strong>第 5 章 不定积分</strong>
+                        <em>62 题 · 未开始</em>
+                      </span>
+                      <span class="chapter-state">未开始</span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="app-screen has-nav" id="screen-practice">
+                <div class="quiz">
+                  <div class="quiz-top">
+                    <button class="icon-btn" data-open="chapters"><i data-lucide="arrow-left"></i></button>
+                    <div class="quiz-subject">
+                      <span>高等数学</span>
+                      <strong>函数与极限</strong>
+                    </div>
+                    <button class="quiz-timer" id="quizTimer">08:32</button>
+                    <button class="icon-btn" data-open="answersheet"><i data-lucide="grid"></i></button>
+                  </div>
+                  <div class="quiz-progress">
+                    <span class="q-bar"><i id="qBar" style="width:28%"></i></span>
+                    <em id="qCount">第 6 / 20 题</em>
+                  </div>
+                  <div class="question-card" id="questionCard">
+                    <div class="q-meta">
+                      <span>单选题</span>
+                      <span id="qTag">知识点：极限运算</span>
+                    </div>
+                    <p class="q-text" id="qText">当 x → 0 时，函数 f(x) = (sin 3x) / x 的极限是？</p>
+                    <div class="options" id="options">
+                      <button class="option" data-index="0"><span>A</span><p>0</p></button>
+                      <button class="option" data-index="1"><span>B</span><p>1</p></button>
+                      <button class="option" data-index="2"><span>C</span><p>3</p></button>
+                      <button class="option" data-index="3"><span>D</span><p>不存在</p></button>
+                    </div>
+                    <div class="answer-panel" id="answerPanel" hidden>
+                      <div class="answer-result" id="answerResult"></div>
+                      <div class="answer-explain" id="answerExplain"></div>
+                      <button class="primary-btn" id="nextQuestion">下一题</button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="app-screen" id="screen-answersheet">
+                <div class="app-page sheet">
+                  <div class="top-bar">
+                    <button class="icon-btn" data-open="practice"><i data-lucide="arrow-left"></i></button>
+                    <h2>答题卡</h2>
+                    <button class="icon-btn" data-open="practice"><i data-lucide="grid"></i></button>
+                  </div>
+                  <div class="sheet-summary">
+                    <div class="ring-sm"><span>5/20</span></div>
+                    <div>
+                      <strong>已答 5 题</strong>
+                      <p>正确 4 题 · 待答 15 题</p>
+                    </div>
+                  </div>
+                  <div class="section-head">
+                    <h3>题目索引</h3>
+                    <span class="sheet-time"><i data-lucide="clock"></i>剩余 38:12</span>
+                  </div>
+                  <div class="sheet-grid" id="sheetGrid">
+                    <button class="sq correct">1</button>
+                    <button class="sq correct">2</button>
+                    <button class="sq correct">3</button>
+                    <button class="sq correct">4</button>
+                    <button class="sq wrong">5</button>
+                    <button class="sq current">6</button>
+                    <button class="sq">7</button>
+                    <button class="sq">8</button>
+                    <button class="sq">9</button>
+                    <button class="sq">10</button>
+                    <button class="sq">11</button>
+                    <button class="sq">12</button>
+                    <button class="sq">13</button>
+                    <button class="sq">14</button>
+                    <button class="sq">15</button>
+                    <button class="sq">16</button>
+                    <button class="sq">17</button>
+                    <button class="sq">18</button>
+                    <button class="sq">19</button>
+                    <button class="sq">20</button>
+                  </div>
+                  <div class="sheet-legend">
+                    <span><i class="lg correct"></i>答对</span>
+                    <span><i class="lg wrong"></i>答错</span>
+                    <span><i class="lg current"></i>当前</span>
+                    <span><i class="lg blank"></i>未答</span>
+                  </div>
+                  <div class="sheet-actions">
+                    <button class="secondary-btn" data-open="practice">继续答题</button>
+                    <button class="primary-btn" data-open="report">提交试卷</button>
+                  </div>
+                </div>
+              </section>
+
+              <section class="app-screen" id="screen-wrongbook">
+                <div class="app-page">
+                  <div class="top-bar">
+                    <button class="icon-btn" data-open="mine"><i data-lucide="arrow-left"></i></button>
+                    <h2>错题本</h2>
+                    <button class="icon-btn" data-open="practice"><i data-lucide="plus"></i></button>
+                  </div>
+                  <div class="filter-tabs">
+                    <button class="active">全部 <em>26</em></button>
+                    <button>数学 <em>14</em></button>
+                    <button>英语 <em>8</em></button>
+                    <button>其他 <em>4</em></button>
+                  </div>
+                  <div class="wrong-list">
+                    <div class="wrong-card">
+                      <div class="wrong-head">
+                        <span class="subject-tag math">数学</span>
+                        <span>错了 3 次</span>
+                      </div>
+                      <p>设函数 f(x) 在 x=1 处可导，且 f'(1)=2，则当 h → 0 时，[f(1+h)-f(1)]/h 的极限是？</p>
+                      <div class="wrong-foot">
+                        <span>函数与极限 · 08-01</span>
+                        <button class="cta-btn" data-open="practice">重新练习</button>
+                      </div>
+                    </div>
+                    <div class="wrong-card">
+                      <div class="wrong-head">
+                        <span class="subject-tag english">英语</span>
+                        <span>错了 1 次</span>
+                      </div>
+                      <p>The committee ____ a report on the new policy last week.</p>
+                      <div class="wrong-foot">
+                        <span>词汇语法 · 07-31</span>
+                        <button class="cta-btn" data-open="practice">重新练习</button>
+                      </div>
+                    </div>
+                    <div class="wrong-card">
+                      <div class="wrong-head">
+                        <span class="subject-tag math">数学</span>
+                        <span>错了 2 次</span>
+                      </div>
+                      <p>曲线 y = x³ 在点 (1, 1) 处的切线方程为？</p>
+                      <div class="wrong-foot">
+                        <span>导数应用 · 07-30</span>
+                        <button class="cta-btn" data-open="practice">重新练习</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="app-screen" id="screen-favorites">
+                <div class="app-page">
+                  <div class="top-bar">
+                    <button class="icon-btn" data-open="mine"><i data-lucide="arrow-left"></i></button>
+                    <h2>我的收藏</h2>
+                    <button class="icon-btn" data-open="messages"><i data-lucide="search"></i></button>
+                  </div>
+                  <div class="fav-summary">
+                    <i data-lucide="bookmark"></i>
+                    <div>
+                      <strong>12 道收藏题目</strong>
+                      <p>收藏后可在任意时间快速回看</p>
+                    </div>
+                  </div>
+                  <div class="fav-list">
+                    <div class="fav-card">
+                      <span class="fav-star"><i data-lucide="star"></i></span>
+                      <div>
+                        <span class="subject-tag math">数学</span>
+                        <p>求极限 lim(x→0) (1-cos x) / x² = ?</p>
+                        <em>极限运算 · 08-01</em>
+                      </div>
+                    </div>
+                    <div class="fav-card">
+                      <span class="fav-star"><i data-lucide="star"></i></span>
+                      <div>
+                        <span class="subject-tag english">英语</span>
+                        <p>Which of the following words is closest in meaning to "efficient"?</p>
+                        <em>词汇语法 · 07-28</em>
+                      </div>
+                    </div>
+                    <div class="fav-card">
+                      <span class="fav-star"><i data-lucide="star"></i></span>
+                      <div>
+                        <span class="subject-tag math">数学</span>
+                        <p>已知 A 为 3 阶矩阵，|A| = 2，则 |2A| = ?</p>
+                        <em>线性代数 · 07-25</em>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="app-screen" id="screen-exam">
+                <div class="app-page">
+                  <div class="top-bar">
+                    <button class="icon-btn" data-open="home"><i data-lucide="arrow-left"></i></button>
+                    <h2>模拟考试</h2>
+                    <button class="icon-btn" data-open="messages"><i data-lucide="bell"></i></button>
+                  </div>
+                  <div class="exam-hero">
+                    <span class="exam-tag">全真模拟</span>
+                    <h3>高等数学（上）</h3>
+                    <p>智能组卷 · 贴近真实考试节奏</p>
+                    <div class="exam-meta">
+                      <span><i data-lucide="list"></i>80 题</span>
+                      <span><i data-lucide="clock"></i>90 分钟</span>
+                      <span><i data-lucide="target"></i>中等难度</span>
+                    </div>
+                    <button class="primary-btn" data-open="practice">开始考试</button>
+                    <em>考试期间请勿切换应用，以免影响计时</em>
+                  </div>
+                  <div class="section-head">
+                    <h3>历史记录</h3>
+                    <button class="text-btn">查看全部 <i data-lucide="chevron-right"></i></button>
+                  </div>
+                  <div class="history-list">
+                    <div class="history-item">
+                      <span class="h-score">87</span>
+                      <span class="h-info">
+                        <strong>模拟考试 · 第 6 次</strong>
+                        <em>07-29 · 用时 72 分钟</em>
+                      </span>
+                      <span class="h-rank">前 12%</span>
+                    </div>
+                    <div class="history-item">
+                      <span class="h-score low">76</span>
+                      <span class="h-info">
+                        <strong>模拟考试 · 第 5 次</strong>
+                        <em>07-22 · 用时 81 分钟</em>
+                      </span>
+                      <span class="h-rank">前 34%</span>
+                    </div>
+                    <div class="history-item">
+                      <span class="h-score mid">81</span>
+                      <span class="h-info">
+                        <strong>模拟考试 · 第 4 次</strong>
+                        <em>07-15 · 用时 68 分钟</em>
+                      </span>
+                      <span class="h-rank">前 25%</span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="app-screen" id="screen-report">
+                <div class="app-page report">
+                  <div class="top-bar">
+                    <button class="icon-btn" data-open="exam"><i data-lucide="arrow-left"></i></button>
+                    <h2>成绩报告</h2>
+                    <button class="icon-btn" data-open="messages"><i data-lucide="share-2"></i></button>
+                  </div>
+                  <div class="report-hero">
+                    <div class="score-ring"><span>87</span></div>
+                    <h3>本次得分</h3>
+                    <p>高等数学 · 模拟考试 · 第 6 次</p>
+                    <div class="score-stats">
+                      <span><strong>87%</strong>正确率</span>
+                      <span><strong>72min</strong>用时</span>
+                      <span><strong>前12%</strong>排名</span>
+                    </div>
+                  </div>
+                  <div class="section-head"><h3>知识点掌握度</h3></div>
+                  <div class="mastery-list">
+                    <div class="mastery-item">
+                      <span>极限运算</span>
+                      <span class="m-bar"><i style="width:92%"></i></span>
+                      <em>92%</em>
+                    </div>
+                    <div class="mastery-item">
+                      <span>导数应用</span>
+                      <span class="m-bar"><i style="width:78%"></i></span>
+                      <em>78%</em>
+                    </div>
+                    <div class="mastery-item">
+                      <span>积分计算</span>
+                      <span class="m-bar"><i style="width:65%"></i></span>
+                      <em>65%</em>
+                    </div>
+                    <div class="mastery-item">
+                      <span>微分方程</span>
+                      <span class="m-bar"><i style="width:58%"></i></span>
+                      <em>58%</em>
+                    </div>
+                  </div>
+                  <div class="section-head"><h3>成绩趋势</h3></div>
+                  <div class="trend-chart">
+                    <div class="bar-col"><span>65</span><i style="height:65%"></i><em>6月</em></div>
+                    <div class="bar-col"><span>72</span><i style="height:72%"></i><em>7月上</em></div>
+                    <div class="bar-col"><span>78</span><i style="height:78%"></i><em>7月中</em></div>
+                    <div class="bar-col"><span>81</span><i style="height:81%"></i><em>7月下</em></div>
+                    <div class="bar-col hot"><span>87</span><i style="height:87%"></i><em>本次</em></div>
+                  </div>
+                  <button class="primary-btn">查看完整解析</button>
+                </div>
+              </section>
+
+              <section class="app-screen" id="screen-study">
+                <div class="app-page">
+                  <div class="top-bar">
+                    <button class="icon-btn" data-open="mine"><i data-lucide="arrow-left"></i></button>
+                    <h2>学习报告</h2>
+                    <button class="icon-btn" data-open="messages"><i data-lucide="calendar"></i></button>
+                  </div>
+                  <div class="study-hero">
+                    <div>
+                      <span>本周学习</span>
+                      <h3>6.5 <em>小时</em></h3>
+                      <p>已连续学习 126 天，超过 89% 的同学</p>
+                    </div>
+                    <div class="study-ring"><span>126<small>天</small></span></div>
+                  </div>
+                  <div class="section-head"><h3>每日刷题</h3><span class="sheet-time">近 7 天</span></div>
+                  <div class="week-chart">
+                    <div class="day-col"><span>45</span><i style="height:45%"></i><em>周一</em></div>
+                    <div class="day-col"><span>62</span><i style="height:62%"></i><em>周二</em></div>
+                    <div class="day-col"><span>38</span><i style="height:38%"></i><em>周三</em></div>
+                    <div class="day-col"><span>74</span><i style="height:74%"></i><em>周四</em></div>
+                    <div class="day-col hot"><span>88</span><i style="height:88%"></i><em>周五</em></div>
+                    <div class="day-col"><span>56</span><i style="height:56%"></i><em>周六</em></div>
+                    <div class="day-col"><span>42</span><i style="height:42%"></i><em>周日</em></div>
+                  </div>
+                  <div class="section-head"><h3>薄弱知识点</h3></div>
+                  <div class="weak-list">
+                    <div class="weak-item">
+                      <span class="weak-ico coral"><i data-lucide="alert-circle"></i></span>
+                      <div><strong>微分方程</strong><p>近 7 天正确率 58%，建议专项练习</p></div>
+                      <button class="cta-btn" data-open="practice">去练习</button>
+                    </div>
+                    <div class="weak-item">
+                      <span class="weak-ico amber"><i data-lucide="alert-circle"></i></span>
+                      <div><strong>定语从句</strong><p>近 7 天正确率 66%，建议复习语法</p></div>
+                      <button class="cta-btn" data-open="practice">去练习</button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="app-screen has-nav" id="screen-mine">
+                <div class="mine">
+                  <div class="mine-head">
+                    <div class="avatar">同</div>
+                    <div class="mine-id">
+                      <h3>小林同学</h3>
+                      <p>大二 · 备考高数</p>
+                    </div>
+                    <button class="icon-btn" data-open="settings"><i data-lucide="settings"></i></button>
+                  </div>
+                  <div class="mine-stats">
+                    <div><strong>126</strong><span>连续天数</span></div>
+                    <div><strong>2,480</strong><span>累计刷题</span></div>
+                    <div><strong>87%</strong><span>正确率</span></div>
+                  </div>
+                  <div class="section-head"><h3>学习服务</h3></div>
+                  <div class="menu-list">
+                    <button class="menu-item" data-open="study">
+                      <span class="menu-ico teal"><i data-lucide="trending-up"></i></span>
+                      <span>学习报告</span>
+                      <i data-lucide="chevron-right"></i>
+                    </button>
+                    <button class="menu-item" data-open="wrongbook">
+                      <span class="menu-ico coral"><i data-lucide="alert-circle"></i></span>
+                      <span>错题本</span>
+                      <i data-lucide="chevron-right"></i>
+                    </button>
+                    <button class="menu-item" data-open="favorites">
+                      <span class="menu-ico amber"><i data-lucide="bookmark"></i></span>
+                      <span>我的收藏</span>
+                      <i data-lucide="chevron-right"></i>
+                    </button>
+                    <button class="menu-item" data-open="messages">
+                      <span class="menu-ico blue"><i data-lucide="message-circle"></i></span>
+                      <span>消息中心</span>
+                      <i data-lucide="chevron-right"></i>
+                    </button>
+                    <button class="menu-item" data-open="support">
+                      <span class="menu-ico green"><i data-lucide="headphones"></i></span>
+                      <span>在线客服</span>
+                      <i data-lucide="chevron-right"></i>
+                    </button>
+                    <button class="menu-item" data-open="settings">
+                      <span class="menu-ico gray"><i data-lucide="settings"></i></span>
+                      <span>设置</span>
+                      <i data-lucide="chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
+              </section>
+
+              <section class="app-screen" id="screen-settings">
+                <div class="app-page">
+                  <div class="top-bar">
+                    <button class="icon-btn" data-open="mine"><i data-lucide="arrow-left"></i></button>
+                    <h2>设置</h2>
+                    <span class="topbar-space"></span>
+                  </div>
+                  <div class="set-group">
+                    <div class="set-row">
+                      <span><i data-lucide="bell"></i>消息通知</span>
+                      <label class="switch"><input type="checkbox" checked><span></span></label>
+                    </div>
+                    <div class="set-row">
+                      <span><i data-lucide="moon"></i>夜间模式</span>
+                      <label class="switch"><input type="checkbox"><span></span></label>
+                    </div>
+                    <div class="set-row">
+                      <span><i data-lucide="download"></i>自动下载题目</span>
+                      <label class="switch"><input type="checkbox" checked><span></span></label>
+                    </div>
+                    <div class="set-row">
+                      <span><i data-lucide="volume-2"></i>答题音效</span>
+                      <label class="switch"><input type="checkbox" checked><span></span></label>
+                    </div>
+                  </div>
+                  <div class="set-group">
+                    <button class="set-row plain">
+                      <span><i data-lucide="user"></i>账号与安全</span>
+                      <i data-lucide="chevron-right"></i>
+                    </button>
+                    <button class="set-row plain">
+                      <span><i data-lucide="lock"></i>隐私设置</span>
+                      <i data-lucide="chevron-right"></i>
+                    </button>
+                    <button class="set-row plain">
+                      <span><i data-lucide="info"></i>关于刷题宝</span>
+                      <em>v1.0.0</em>
+                    </button>
+                  </div>
+                </div>
+              </section>
+
+              <section class="app-screen" id="screen-messages">
+                <div class="app-page">
+                  <div class="top-bar">
+                    <button class="icon-btn" data-open="mine"><i data-lucide="arrow-left"></i></button>
+                    <h2>消息中心</h2>
+                    <button class="icon-btn" data-open="settings"><i data-lucide="settings"></i></button>
+                  </div>
+                  <div class="filter-tabs">
+                    <button class="active">全部</button>
+                    <button>系统</button>
+                    <button>练习</button>
+                  </div>
+                  <div class="msg-list">
+                    <div class="msg-item unread">
+                      <span class="msg-ico blue"><i data-lucide="award"></i></span>
+                      <span class="msg-body">
+                        <strong>暑期刷题挑战开启</strong>
+                        <p>连续打卡 7 天，赢取专属徽章和会员礼包</p>
+                        <em>08-01 10:20</em>
+                      </span>
+                      <span class="badge-new">新</span>
+                    </div>
+                    <div class="msg-item">
+                      <span class="msg-ico teal"><i data-lucide="book-open"></i></span>
+                      <span class="msg-body">
+                        <strong>本周学习报告已生成</strong>
+                        <p>本周共刷题 405 题，正确率提升 6%</p>
+                        <em>08-01 08:00</em>
+                      </span>
+                    </div>
+                    <div class="msg-item">
+                      <span class="msg-ico coral"><i data-lucide="alert-circle"></i></span>
+                      <span class="msg-body">
+                        <strong>你有 8 道错题待复习</strong>
+                        <p>错题本新增「微分方程」专项练习</p>
+                        <em>07-31 22:15</em>
+                      </span>
+                    </div>
+                    <div class="msg-item">
+                      <span class="msg-ico amber"><i data-lucide="calendar"></i></span>
+                      <span class="msg-body">
+                        <strong>模考提醒</strong>
+                        <p>你预约的模拟考试将在今天 20:00 开始</p>
+                        <em>07-31 18:30</em>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="app-screen" id="screen-support">
+                <div class="chat">
+                  <div class="chat-top">
+                    <button class="icon-btn" data-open="mine"><i data-lucide="arrow-left"></i></button>
+                    <div class="chat-title">
+                      <h3>在线客服</h3>
+                      <span><i class="online-dot"></i>在线</span>
+                    </div>
+                    <button class="icon-btn"><i data-lucide="more-vertical"></i></button>
+                  </div>
+                  <div class="chat-body" id="chatBody">
+                    <div class="chat-date">今天 10:24</div>
+                    <div class="chat-msg agent">
+                      <p>你好，我是刷题宝客服小刷，有什么可以帮你？</p>
+                      <span>智能客服</span>
+                    </div>
+                    <div class="chat-msg user">
+                      <p>如何查看成绩报告？</p>
+                    </div>
+                    <div class="chat-msg agent">
+                      <p>完成模拟考试后，在「我的」-「学习报告」或考试结果页即可查看成绩报告。</p>
+                      <span>智能客服</span>
+                    </div>
+                  </div>
+                  <div class="chat-quick" id="chatQuick">
+                    <button>如何开通会员</button>
+                    <button>错题本怎么用</button>
+                    <button>联系人工客服</button>
+                  </div>
+                  <div class="chat-input">
+                    <button class="icon-btn"><i data-lucide="plus"></i></button>
+                    <input id="chatInput" placeholder="请输入问题...">
+                    <button class="send-btn" id="chatSend"><i data-lucide="send"></i></button>
+                  </div>
+                </div>
+              </section>
+
+              <nav class="bottom-nav" id="bottomNav">
+                <button class="nav-tab active" data-screen="home"><i data-lucide="home"></i><span>首页</span></button>
+                <button class="nav-tab" data-screen="bank"><i data-lucide="library"></i><span>题库</span></button>
+                <button class="nav-tab" data-screen="practice"><i data-lucide="pencil"></i><span>练习</span></button>
+                <button class="nav-tab" data-screen="mine"><i data-lucide="user"></i><span>我的</span></button>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="notes">
+        <div class="notes-card">
+          <div class="notes-head">
+            <i data-lucide="info"></i>
+            <h3>页面说明</h3>
+          </div>
+          <p class="note-desc" id="noteDesc">品牌启动画面，展示产品定位与核心标语。</p>
+          <div class="notes-head second">
+            <i data-lucide="mouse-pointer-click"></i>
+            <h3>交互提示</h3>
+          </div>
+          <ul class="note-tips" id="noteTips">
+            <li>点击页面名称可切换原型页面</li>
+            <li>登录、引导页等按钮可继续流程</li>
+            <li>底部标签可切换主功能页面</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="assets/lucide.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
