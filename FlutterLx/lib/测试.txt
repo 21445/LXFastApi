@@ -1,0 +1,102 @@
+// import 'package:flutter/material.dart';
+// import 'package:flutterlx/YingDaoYe/YingDaoYe.dart';
+
+// void main(List<String> args) {
+//   runApp(
+//     MaterialApp(
+//       home: KS(),
+//     ),
+//   );
+// }
+
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: TestPage(),
+    );
+  }
+}
+
+class TestPage extends StatefulWidget {
+  @override
+  State<TestPage> createState() => _TestPageState();
+  
+}
+
+class _TestPageState extends State<TestPage> {
+  int sss = 0;
+  String resultText = "等待请求";
+  Future<void> testApi(int index) async {
+    Dio dio = Dio();
+    // ⚠️安卓模拟器访问电脑后端必须写10.0.2.2，不能写127.0.0.1
+    String url = "http://127.0.0.1:8000/user";
+
+    try {
+      Response resp = await dio.get(url);
+      print("状态码：${resp.statusCode}");
+      print("后端返回数据：${resp.data}");
+
+      // 返回的是 List 数组
+      List<dynamic> userList = resp.data;
+
+      // 取第一条用户
+      Map<String, dynamic> firstUser = userList[index];
+      int uid = firstUser["id"];
+      String uname = firstUser["username"];
+      String email = firstUser["email"];
+
+      setState(() {
+        resultText = "第一个用户\nID:$uid\n用户名:$uname\n邮箱:$email";
+      });
+
+    } catch (e) {
+      print("请求出错 $e");
+      setState(() {
+        resultText = "出错：$e";
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Dio测试")),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                labelText: "请输入用户索引",
+              ),
+              onChanged: (value) {
+                setState(() {
+                  sss = int.parse(value);
+                });
+              },
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await testApi(sss-1 );
+              },
+              child: Text("点击测试请求FastAPI"),
+            ),
+            SizedBox(height: 20),
+            Text(resultText),
+          ],
+        ),
+      ),
+    );
+  }
+}
