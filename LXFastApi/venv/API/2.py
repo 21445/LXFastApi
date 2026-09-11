@@ -24,7 +24,7 @@ TORTOISE_ORM: Dict = {
         # 生产环境示例：PostgreSQL
         # "default": "postgres://user:password@localhost:5432/dbname",
         # 生产环境示例：MySQL
-        "default": "mysql://root:root@127.0.0.1:3306/suatibao",
+        "default": "mysql://root:root@127.0.0.1:3307/suatibao",
     },
     "apps": {
         "models": {
@@ -58,7 +58,7 @@ from ShuTiBao import submissions,computer_quiz
 
 @app.get("/user")
 async def read_root():
-  usder = await users.all().limit(5).offset(0)
+  usder = await users.all().limit(50).offset(0)
   print(usder)
   return usder
 
@@ -95,5 +95,5 @@ async def read_root(id:int ):
 
 if __name__ == "__main__":  # 当直接运行此脚本时（而非作为模块导入时）
     import uvicorn  # 导入uvicorn ASGI服务器
-    uvicorn.run("2:app", host="0.0.0.0", port=8000, reload=True)  # 启动FastAPI应用，监听所有网络接口的8000端口
+    uvicorn.run("2:app", host="0.0.0.0", port=8000, reload=False)  # 启动FastAPI应用，监听所有网络接口的8000端口
 
