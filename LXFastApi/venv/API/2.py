@@ -46,7 +46,7 @@ from tortoise.contrib.fastapi import register_tortoise
 
 register_tortoise(app, config=TORTOISE_ORM, generate_schemas=True, add_exception_handlers=True,)  # 注册 Tortoise-ORM 到 FastAPI 应用，生成数据库模式并添加异常处理程序
 
-from data_stu import create_users
+# from data_stu import create_users
 from ShuTiBao import users
 from ShuTiBao import submissions,computer_quiz
 
@@ -58,15 +58,17 @@ from ShuTiBao import submissions,computer_quiz
 
 @app.get("/user")
 async def read_root():
-  usder = await users.all().limit(50).offset(0)
+  usder = await users.all().limit(2).offset(0)
   print(usder)
   return usder
 
 @app.get("/getquestion")
-async def read_root(id:str):
-    getuser = await computer_quiz.get(question_id=id)
-    aaa = await submissions.filter(question_id=id)
-    return getuser,aaa
+async def read_root():
+    getuser = await computer_quiz.all().offset(0)
+    # print(getuser)
+    
+    # aaa = await submissions.filter(question_id=id)
+    return getuser
 
 @app.get("/getusers")
 async def read_root(id:int ):
@@ -95,5 +97,5 @@ async def read_root(id:int ):
 
 if __name__ == "__main__":  # 当直接运行此脚本时（而非作为模块导入时）
     import uvicorn  # 导入uvicorn ASGI服务器
-    uvicorn.run("2:app", host="0.0.0.0", port=8000, reload=False)  # 启动FastAPI应用，监听所有网络接口的8000端口
+    uvicorn.run("2:app", host="0.0.0.0", port=8000, reload=True)  # 启动FastAPI应用，监听所有网络接口的8000端口
 

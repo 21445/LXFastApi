@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterlx/ShouYe/TK.dart';
 import 'package:flutterlx/ShouYe/ZY.dart';
 import 'package:svg_flutter/svg.dart';
 
@@ -12,9 +13,9 @@ int currentIndex = 0;
 Widget _buildPageContent() {
     switch (currentIndex) {
       case 0:
-        return ZYJM(); //首页，显示ZYJM
+        return  ZYJM(); //首页，显示ZYJM
       case 1:
-        return Container(child: Center(child: Text("题库页面")));
+        return GRTK();
       case 2:
         return Container(child: Center(child: Text("练习页面")));
       case 3:

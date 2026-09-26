@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutterlx/DenLu/SRK.dart';
+import 'package:flutterlx/YanShiKuang/SRK.dart';
 import 'package:svg_flutter/svg.dart';
 
 class ZYJM extends StatefulWidget {
@@ -320,8 +320,12 @@ class _ZYJMState extends State<ZYJM> {
   @override
   Widget build(BuildContext context) {
     return  
-       SingleChildScrollView(
-        padding: EdgeInsets.only(bottom: 16), 
+      Container(
+         width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: SingleChildScrollView(
+       
+        // padding: EdgeInsets.only(bottom: 16), 
         child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -357,8 +361,49 @@ class _ZYJMState extends State<ZYJM> {
                 ],
               ),
             ),
-            SizedBox(height:6),
+            // SizedBox(height:4),
             //快捷功能网格 GridView.count
+           Padding(
+            padding: EdgeInsets.symmetric(horizontal:16),
+            child: Container(
+              padding: EdgeInsets.all(12),
+                height: 100,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: Color.fromRGBO(223, 237, 255, 1),
+                    width: 1,
+                  ),
+                ),
+                
+                 child: Material(
+                  color: const Color.fromARGB(0, 204, 7, 7),
+                  
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(15),
+                    onTap: () {
+                      print("快捷功能");
+                    },
+
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset("lib/assets/images/camera.svg",width:24,colorFilter: ColorFilter.mode(Color.fromARGB(236, 220, 116, 84), BlendMode.srcIn),),
+                        SizedBox(width:4),
+                        Text("题库上传",style: TextStyle(color:Color.fromARGB(255, 2, 2, 2),fontSize:14)),
+                      ],
+                    ),
+                    )
+                  )
+                ),
+              ),
+            ),
+            
+
+            SizedBox(height:10),
+
             Padding(
               padding: EdgeInsets.symmetric(horizontal:16),
               child: GridView.count(
@@ -375,6 +420,9 @@ class _ZYJMState extends State<ZYJM> {
                   _buildFuncItem(icon:SvgPicture.asset("lib/assets/images/timer.svg",width:28,colorFilter: ColorFilter.mode(Color(0xff86d2a8),BlendMode.srcIn)), title:"模拟考试"),
                   _buildFuncItem(icon:SvgPicture.asset("lib/assets/images/circle-alert.svg",width:28,colorFilter: ColorFilter.mode(Color(0xffe6c285),BlendMode.srcIn)), title:"错题本"),
                   _buildFuncItem(icon:SvgPicture.asset("lib/assets/images/bookmark.svg",width:28,colorFilter: ColorFilter.mode(Color(0xffdd9fc2),BlendMode.srcIn)), title:"我的收藏"),
+                  //  _buildFuncItem(icon:SvgPicture.asset("lib/assets/images/zap.svg",width:28,colorFilter: ColorFilter.mode(Color(0xff52b8e8),BlendMode.srcIn)), title:"题库上传"),
+                  //   _buildFuncItem(icon:SvgPicture.asset("lib/assets/images/zap.svg",width:28,colorFilter: ColorFilter.mode(Color(0xff52b8e8),BlendMode.srcIn)), title:"智能刷题"),
+                  //    _buildFuncItem(icon:SvgPicture.asset("lib/assets/images/zap.svg",width:28,colorFilter: ColorFilter.mode(Color(0xff52b8e8),BlendMode.srcIn)), title:"智能刷题"),
                 
                 ],
               ),
@@ -382,10 +430,13 @@ class _ZYJMState extends State<ZYJM> {
             SizedBox(height:20),
             //继续上次练习卡片
             _buildContinueCard(),
-            SizedBox(height:40),
+            
+            
+
           ],
         )
-      );
+       
+      ));
     
   
   }
