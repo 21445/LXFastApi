@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterlx/LianXi/TKQHLJ.dart';
@@ -18,8 +16,7 @@ String? xuanxiang;
 
 bool isAnswered = false;
 
-
-Dio dio = Dio(BaseOptions(baseUrl: "http://10.42.254.9:8000"));
+Dio dio = Dio(BaseOptions(baseUrl: "http://192.168.22.240:8000"));
 
 String? question = "";
 List<String> options = [];
@@ -27,27 +24,17 @@ Map<String, dynamic> TIKU = {};
 List<Map<String, dynamic>> lsitmap = [];
 int currentQuestion = 0;
 
+Future<void> getQuestions() async {
+  Response res = await dio.get("/getquestion");
 
+  List<dynamic> data = res.data;
+  lsitmap = data.map((e) => e as Map<String, dynamic>).toList();
 
-
-   Future<void> getQuestions() async {
- 
-    Response res = await dio.get("/getquestion");
-
-    List<dynamic> data = res.data;
-    lsitmap = data.map((e) => e as Map<String, dynamic>).toList();
-    
-  
-    
-    // print(res.data);
+  // print(res.data);
 }
 
-
-
-
 class _suatiyemianState extends State<suatiyemian> {
-
-// String xuanx = lsitmap[currentQuestion]["correct_answer"].toString();
+  // String xuanx = lsitmap[currentQuestion]["correct_answer"].toString();
 
   Widget XZK({String? XX, String? XZX}) {
     late Color bgColor;
@@ -61,8 +48,7 @@ class _suatiyemianState extends State<suatiyemian> {
       bgColor = Colors.white;
       circleColor = Color.fromARGB(255, 200, 204, 208);
       borderColor = Color.fromARGB(255, 220, 224, 228);
-    }
-     else {
+    } else {
       if (XX == xuanxiang) {
         if (XX == xuanx) {
           bgColor = Color.fromARGB(255, 230, 247, 233);
@@ -73,19 +59,16 @@ class _suatiyemianState extends State<suatiyemian> {
           print(lsitmap[currentQuestion]["correct_answer"].toString());
           print(xuanx);
           print("------------");
-        } 
-        else {
+        } else {
           bgColor = Color.fromARGB(255, 253, 234, 230);
           circleColor = Color.fromARGB(255, 208, 128, 108);
           borderColor = Color.fromARGB(255, 224, 164, 148);
         }
-      } 
-      else if (XX == xuanx) {
+      } else if (XX == xuanx) {
         bgColor = Color.fromARGB(255, 230, 247, 233);
         circleColor = Color.fromARGB(255, 82, 183, 136);
         borderColor = Color.fromARGB(255, 147, 208, 164);
-      } 
-      else {
+      } else {
         bgColor = Colors.white;
         circleColor = Color.fromARGB(255, 200, 204, 208);
         borderColor = Color.fromARGB(255, 220, 224, 228);
@@ -94,7 +77,7 @@ class _suatiyemianState extends State<suatiyemian> {
 
     return Container(
       height: 60,
-      
+
       decoration: BoxDecoration(
         color: bgColor,
         borderRadius: BorderRadius.circular(10),
@@ -109,7 +92,7 @@ class _suatiyemianState extends State<suatiyemian> {
               : () {
                   setState(() {
                     xuanxiang = XX;
-                    
+
                     isAnswered = true; // 点击一次之后锁定答题
                   });
                   print(xuanxiang);
@@ -155,30 +138,28 @@ class _suatiyemianState extends State<suatiyemian> {
       child: Column(
         children: [
           SizedBox(height: 10),
-          
-          Padding(padding: EdgeInsets.only(left: 10, right: 10),
-          child: Container(
-            // margin: EdgeInsets.only(left: 10, ),
-            width:80,
-            height: 20,
-            
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: const Color.fromARGB(255, 141, 205, 205)
-            ),
-            child: Center(
-              child: Text("单选题",style: TextStyle(fontSize: 15,)),
+
+          Padding(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            child: Container(
+              // margin: EdgeInsets.only(left: 10, ),
+              width: 80,
+              height: 20,
+
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: const Color.fromARGB(255, 141, 205, 205),
+              ),
+              child: Center(child: Text("单选题", style: TextStyle(fontSize: 15))),
             ),
           ),
-          
-          ),
-           
-          
-         
+
           SizedBox(height: 20),
           Container(
-           
-            child: Text("${currentQuestion+1}. ${ lsitmap[currentQuestion]["title"]?? ""}",style: TextStyle(fontSize: 18)),
+            child: Text(
+              "${currentQuestion + 1}. ${lsitmap[currentQuestion]["title"] ?? ""}",
+              style: TextStyle(fontSize: 18),
+            ),
           ),
           SizedBox(height: 40),
           XZK(XX: "A", XZX: lsitmap[currentQuestion]["option_a"]),
@@ -227,26 +208,22 @@ class _suatiyemianState extends State<suatiyemian> {
               ),
               SizedBox(height: 30),
               DTK(),
-            
+
               SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 // crossAxisAlignment: CrossAxisAlignment.,
                 children: [
-                  
                   TextButton(
                     onPressed: () {
                       setState(() {
-                        if (currentQuestion == 0){
-                          TSK().XXTC("没有题目了",borderRadius: 15);
-
-                        }else{
-                          currentQuestion --;
+                        if (currentQuestion == 0) {
+                          TSK().XXTC("没有题目了", borderRadius: 15);
+                        } else {
+                          currentQuestion--;
                           print(lsitmap[currentQuestion]["correct_answer"]);
                           print(lsitmap.length);
                         }
-                        
-                        
                       });
                     },
                     child: Container(
@@ -254,11 +231,22 @@ class _suatiyemianState extends State<suatiyemian> {
                       width: 150,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        color: currentQuestion == 0 ?   Colors.transparent : Color(0xFF90C4E1),
-                        border: Border.all(color:  Color.fromARGB(255, 188, 230, 252), width: 1),
+                        color: currentQuestion == 0
+                            ? Colors.transparent
+                            : Color(0xFF90C4E1),
+                        border: Border.all(
+                          color: Color.fromARGB(255, 188, 230, 252),
+                          width: 1,
+                        ),
                       ),
                       child: Center(
-                        child: Text("上一题",style: TextStyle(fontSize: 18,color: Color.fromARGB(255, 255, 255, 255),)),
+                        child: Text(
+                          "上一题",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -275,15 +263,21 @@ class _suatiyemianState extends State<suatiyemian> {
                       width: 150,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        color: const Color(0xFF90C4E1)
+                        color: const Color(0xFF90C4E1),
                       ),
                       child: Center(
-                        child: Text("下一题",style: TextStyle(fontSize: 15,color: Color.fromARGB(255, 255, 255, 255),)),
+                        child: Text(
+                          "下一题",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),
