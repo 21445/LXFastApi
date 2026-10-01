@@ -24,11 +24,12 @@ TORTOISE_ORM: Dict = {
         # 生产环境示例：PostgreSQL
         # "default": "postgres://user:password@localhost:5432/dbname",
         # 生产环境示例：MySQL
-        "default": "mysql://root:root@127.0.0.1:3307/suatibao",
+        "default": "mysql://root:root@127.0.0.1:3306/suatibao",
     },
     "apps": {
         "models": {
             "models": ["ShuTiBao", "aerich.models"],  # 模型模块和 Aerich 迁移模型
+            
             "default_connection": "default",
         }
     },
@@ -63,12 +64,11 @@ async def read_root():
   return usder
 
 @app.get("/getquestion")
-async def read_root():
-    getuser = await computer_quiz.all().offset(0)
-    # print(getuser)
-    
-    # aaa = await submissions.filter(question_id=id)
-    return getuser
+async def read_root( id:str ):
+    getuser = await computer_quiz.filter(question_id=id).first()
+    print(getuser)
+    aaa = await submissions.filter(question_id=id)
+    return getuser,aaa
 
 @app.get("/getusers")
 async def read_root(id:int ):
