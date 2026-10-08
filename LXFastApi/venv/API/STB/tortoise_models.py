@@ -14,7 +14,8 @@ from tortoise import fields, models
 class User(models.Model):
     """用户 (用户与账户域)."""
     id = fields.BigIntField(pk=True)
-    phone = fields.CharField(max_length=20, unique=True)
+    # 现在用邮箱登录，长度放宽到 128（原 20 只够手机号）
+    phone = fields.CharField(max_length=128, unique=True)
     nickname = fields.CharField(max_length=32)
     avatar_url = fields.CharField(max_length=255, null=True)
     grade = fields.CharField(max_length=32, null=True)
@@ -36,7 +37,7 @@ class UserAuth(models.Model):
     id = fields.BigIntField(pk=True)
     user = fields.ForeignKeyField("models.User", related_name="user_auth_user", source_field="user_id", on_delete=fields.CASCADE)
     auth_type = fields.CharField(max_length=16)
-    identifier = fields.CharField(max_length=64)
+    identifier = fields.CharField(max_length=128)
     credential = fields.CharField(max_length=128, null=True)
     verified = fields.IntField(default=1)
     created_at = fields.DatetimeField(auto_now_add=True)
@@ -49,7 +50,8 @@ class UserAuth(models.Model):
 class SmsCode(models.Model):
     """短信验证码 (用户与账户域)."""
     id = fields.BigIntField(pk=True)
-    phone = fields.CharField(max_length=20)
+    # 存的是邮箱（沿用原 phone 字段）
+    phone = fields.CharField(max_length=128)
     code = fields.CharField(max_length=8)
     scene = fields.CharField(max_length=16)
     send_ip = fields.CharField(max_length=45, null=True)

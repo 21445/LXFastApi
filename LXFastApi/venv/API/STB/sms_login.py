@@ -72,7 +72,7 @@ async def send_email_code(recv_account: str, scene: str, client_ip: str):
         print(f"❌ 发送失败: {str(e)}")
         return None
 
-async def verify_code(recv_account: str, scene: str, input_code: str) -> bool:
+async def verify_code(email: str, code: str, scene: str) -> bool:
     """
     校验验证码
     return True=验证通过；False=失败
@@ -80,16 +80,17 @@ async def verify_code(recv_account: str, scene: str, input_code: str) -> bool:
     now = datetime.now()
     # 查询：账号匹配、场景匹配、未过期、未使用
     record = await SmsCode.filter(
-        phone=recv_account,
+        phone=email,
+        code=code,
         scene=scene,
-        code=input_code,
         expire_at__gt=now,
         used_at__isnull=True
     ).first()
 
+
     if record:
         # 验证成功，写入核销时间，标记已使用，防止重复使用
-        record.delete()
+        await record.delete()
         return True
     return False
 
