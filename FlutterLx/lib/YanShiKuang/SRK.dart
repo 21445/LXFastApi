@@ -15,6 +15,11 @@ class ClassName {
     TextEditingController? controller,
   }) {
     return TextFormField(
+      cursorColor: Colors.grey[400],
+      cursorErrorColor: Colors.red,
+      cursorHeight: 25,
+      cursorWidth: 2,
+      cursorRadius: Radius.circular(2),
       style: const TextStyle(fontSize: 20, color: Color.fromARGB(205, 8, 8, 8)),
       maxLines: 1,
       controller: controller,
@@ -111,12 +116,12 @@ class TSK {
       onlyOne: onlyOne ?? true,
       toastBuilder: (cancel) {
         return Container(
-          height: height ?? 60,
+          height: height ?? 40,
           width: width ?? 200,
           // padding: EdgeInsets.only(left: 30,right: 30),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: bgColor ?? const Color.fromARGB(182, 100, 100, 100),
+            color: bgColor ?? const Color.fromARGB(207, 100, 100, 100),
             borderRadius: BorderRadius.circular(borderRadius ?? 10),
           ),
           child: Text(
